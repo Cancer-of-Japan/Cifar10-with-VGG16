@@ -35,10 +35,9 @@ win.setWindowTitle('VGG16')
 label = QtWidgets.QLabel(win)
 label.setText("1.Show Train Images")
 label.adjustSize()
+label.move(10, 10)
 
-=======
-from keras.layers import Dense, Dropout, Flatten, Conv2D, MaxPool2D
->>>>>>> 6f80e15b28127e7669c713710785958fc0c6cc08
+
 
 cifar10 = keras.datasets.cifar10
 (train_images, train_labels), (test_images, test_labels) = cifar10.load_data()
@@ -59,16 +58,26 @@ print(test_labels.shape)
 class_names = ('airplane', 'automobile', 'bird', 'cat', 'deer', 
                'dog', 'frog', 'horse', 'ship', 'truck')
 plt.figure(figsize  = (32, 32))
+#Q5_1 Code Part
+def Q5_1():
+    for i in range(10):
+        x = np.random.choice(range(len(train_labels)))
+        plt.subplot(2, 5, i+1)
+        plt.xticks([])
+        plt.yticks([])
+        plt.grid(False)
+        plt.imshow(train_images[x], cmap = plt.cm.binary)
+        plt.xlabel(class_names[train_labels[x].item()])
+    plt.show()
+#Push Button for Q5_1
+button5_1 = QtWidgets.QPushButton(win)
+button5_1.clicked.connect(Q5_1)
+button5_1.resize(200, 40)
+button5_1.setText('Show Image')
+button5_1.move(40, 50)
 
-for i in range(10):
-    x = np.random.choice(range(len(train_labels)))
-    plt.subplot(2, 5, i+1)
-    plt.xticks([])
-    plt.yticks([])
-    plt.grid(False)
-    plt.imshow(train_images[x], cmap = plt.cm.binary)
-    plt.xlabel(class_names[train_labels[x].item()])
-plt.show()
+
+
 
 train_labels = keras.utils.to_categorical(train_labels,10)
 test_labels = keras.utils.to_categorical(test_labels,10)
