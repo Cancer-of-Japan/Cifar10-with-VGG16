@@ -1,12 +1,14 @@
 import cv2
 from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QMessageBox, QApplication, QMainWindow, QAction, QLineEdit, QMessageBox
+from PyQt5.QtWidgets import QApplication, QMainWindow, QAction, QLineEdit, QMessageBox
 from PyQt5.QtGui import QIcon
 from PyQt5 import QtCore
-from matplotlib import pyplot as plt
+from matplotlib imprt pyplot as plt
 import sys
 import glob
 import os
+=======
+>>>>>>> 6f80e15b28127e7669c713710785958fc0c6cc08
 import tensorflow as tf
 from tensorflow import keras
 import numpy as np
@@ -17,6 +19,7 @@ import torch
 import torchvision
 import torchvision.transforms as transforms
 from keras.utils import np_utils, plot_model
+<<<<<<< HEAD
 from keras.layers import Dense, Dropout, Flatten, Conv2D, MaxPool2D, BatchNormalization
 from keras.optimizers import SGD
 
@@ -26,39 +29,6 @@ win = QMainWindow()
 win.setGeometry(550, 550, 1000, 500)
 win.setWindowTitle('VGG16')
 
-#Loading data and settin gup data
-cifar10 = keras.datasets.cifar10
-(train_images, train_labels), (test_images, test_labels) = cifar10.load_data()
-
-train_images = train_images/255
-test_images = test_images/255
-
-class_names = ('airplane', 'automobile', 'bird', 'cat', 'deer', 
-               'dog', 'frog', 'horse', 'ship', 'truck')
-#train_labels = np_utils.to_categorical(train_labels, class_names)
-#test_labels = np_utils.to_categorical(test_labels, class_names)
-'''
-print(train_images.shape)
-print(train_labels.shape)
-
-print(test_images.shape)
-print(test_labels.shape)
-'''
-class_names = ('airplane', 'automobile', 'bird', 'cat', 'deer', 
-               'dog', 'frog', 'horse', 'ship', 'truck')
-plt.figure(figsize  = (10, 10))
-
-for i in range(10):
-    x = np.random.choice(range(len(train_labels)))
-    plt.subplot(2, 5, i+1)
-    plt.xticks([])
-    plt.yticks([])
-    plt.grid(False)
-    plt.imshow(train_images[x], cmap = plt.cm.binary)
-    plt.xlabel(class_names[train_labels[x].item()])
-plt.savefig('show_random.png')
-
-
 ##### Q5 #####
 #Label for Q1
 label = QtWidgets.QLabel(win)
@@ -66,18 +36,46 @@ label.setText("1.Show Train Images")
 label.adjustSize()
 label.move(10, 10)
 
+
+
+cifar10 = keras.datasets.cifar10
+(train_images, train_labels), (test_images, test_labels) = cifar10.load_data()
+
+train_images = train_images/255
+test_images = test_images/255
+class_names = ('airplane', 'automobile', 'bird', 'cat', 'deer', 
+               'dog', 'frog', 'horse', 'ship', 'truck')
+#train_labels = np_utils.to_categorical(train_labels, class_names)
+#test_labels = np_utils.to_categorical(test_labels, class_names)
+
+print(train_images.shape)
+print(train_labels.shape)
+
+print(test_images.shape)
+print(test_labels.shape)
+
+class_names = ('airplane', 'automobile', 'bird', 'cat', 'deer', 
+               'dog', 'frog', 'horse', 'ship', 'truck')
+plt.figure(figsize  = (32, 32))
 #Q5_1 Code Part
 def Q5_1():
-    random_img = cv2.imread('show_random.png')
-    cv2.imshow('random selection', random_img)
-    
-    
+    for i in range(10):
+        x = np.random.choice(range(len(train_labels)))
+        plt.subplot(2, 5, i+1)
+        plt.xticks([])
+        plt.yticks([])
+        plt.grid(False)
+        plt.imshow(train_images[x], cmap = plt.cm.binary)
+        plt.xlabel(class_names[train_labels[x].item()])
+    plt.show()
 #Push Button for Q5_1
 button5_1 = QtWidgets.QPushButton(win)
 button5_1.clicked.connect(Q5_1)
 button5_1.resize(200, 40)
 button5_1.setText('Show Image')
 button5_1.move(40, 50)
+
+
 
 
 train_labels = keras.utils.to_categorical(train_labels,10)
@@ -87,38 +85,12 @@ batch_size = 64
 num_classes = 10
 epochs = 100
 
-
-
 model = keras.Sequential()
 
+<<<<<<< HEAD
 weight_decay = 0.00005
 
 model = keras.Sequential()
-
-
-print('hyperparameters:')
-print('batch size: ', batch_size)
-print('learnig rate: ',weight_decay)
-print('optimizer: SGD')
-
-
-#Q5_2 Code Part
-def Q5_2():
-    pass
-        
-
-
-#Push Button for Q5_2
-button5_2 = QtWidgets.QPushButton(win)
-button5_2.clicked.connect(Q5_2)
-button5_2.resize(200, 40)
-button5_2.setText('Show Image')
-button5_2.move(40, 100)
-
-
-
-
-
 #Block 1
 model.add(keras.layers.Conv2D(64,  kernel_size=(3,3),
                               #strides=(2,2),
@@ -210,22 +182,15 @@ model.add(keras.layers.Dense(10, activation='softmax'))
 
 model.summary()
 
-
-"""
 sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
 model.compile(loss='categorical_crossentropy', metrics=['accuracy'], optimizer='adam')
-history = model.fit(train_images,train_labels, batch_size=batch_size, epochs=epochs, verbose=1, validation_data=(test_images,test_labels))
+history = model.fit(train_images,train_labels batch_size=batch_size, epochs=epochs, verbose=1, validation_data=(test_images,test_labels))
 
-#test_loss, test_acc = model.evaluate(test_image,test_label)
+test_loss, test_acc = model.evaluate(test_image,test_label)
 print('Test Accuracy',test_acc)
-"""
- 
-#GUI WINDOW
-win.show()
-sys.exit(app.exec_())
-#OpenCV Window
-cv2.waitKey(10)
-cv2.destroyAllWindows()
+
+=======
+>>>>>>> 6f80e15b28127e7669c713710785958fc0c6cc08
 
 
 
